@@ -1,0 +1,6 @@
+1- Escopo
+
+2- Usar class no path para poupar linha de código
+
+3- Usar RegexExpression
+
