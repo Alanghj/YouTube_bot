@@ -25,7 +25,7 @@ def youtube_bot_path():
     youtube.click_path(click)
 
     # # Find the video
-    with open('youtube_list.json') as f:
+    with open('data_base/youtube_list.json') as f:
         data = json.load(f)
     pathies = random.choice(data['links'])
     print(pathies)
