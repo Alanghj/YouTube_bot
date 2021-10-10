@@ -3,6 +3,7 @@ from selenium import webdriver
 from youtube_cl import YouTube
 import pandas as pd
 import random
+import json
 import time
 
 MUSIC_NAME = 'Sad music'
@@ -24,9 +25,10 @@ def youtube_bot_path():
     youtube.click_path(click)
 
     # # Find the video
-    time.sleep(4)
-    dt = pd.read_json("youtube_list.json")
-    pathies = random.choice(dt['links'])
+    with open('youtube_list.json') as f:
+        data = json.load(f)
+    pathies = random.choice(data['links'])
+    print(pathies)
     time.sleep(2)
     click = driver.find_element_by_xpath(pathies).click()
     youtube.click_path(click)
