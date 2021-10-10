@@ -1,7 +1,7 @@
 from selenium.webdriver.common.keys import Keys
 from selenium import webdriver
-from youtube_cl import YouTube
-import pandas as pd
+from scripts.youtube_cl import YouTube
+# import pandas as pd
 import random
 import json
 import time
@@ -28,7 +28,6 @@ def youtube_bot_path():
     with open('data_base/youtube_list.json') as f:
         data = json.load(f)
     pathies = random.choice(data['links'])
-    print(pathies)
     time.sleep(2)
     click = driver.find_element_by_xpath(pathies).click()
     youtube.click_path(click)
