@@ -17,11 +17,12 @@ def graphical_interface():
 
     # Button start
     cmd = Button(frm, text="Start Music", command=youtube_bot_path)
-    cmd.grid(column=1, row=0)
+    cmd.grid(column=0, row=1)
 
     # Button end
     cmd2 = Button(frm, text="End Music", command=menu_initial.destroy)
-    cmd2.grid(column=2, row=0)
+    cmd2.grid(column=1, row=1)
+
 
     # Begin the user view
     menu_initial.mainloop()
