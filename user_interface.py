@@ -23,7 +23,6 @@ def graphical_interface():
     cmd2 = Button(frm, text="End Music", command=menu_initial.destroy)
     cmd2.grid(column=1, row=1)
 
-
     # Begin the user view
     menu_initial.mainloop()
 
