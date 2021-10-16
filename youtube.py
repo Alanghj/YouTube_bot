@@ -1,19 +1,53 @@
-from selenium import webdriver
-import time
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium import webdriver
+import random
+import json
+import time
 
 
-driver = webdriver.Chrome()
-driver.get("http://www.youtube.com/")
+MUSIC_NAME = 'Sad music'
 
-driver.find_element_by_xpath('/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/form/div[1]/div[1]/input').click()
-driver.find_element_by_xpath('/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/form/div[1]/div[1]/input').send_keys('sad music')
-time.sleep(2)
-driver.find_element_by_xpath('/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/form/div[1]/div[1]/input').send_keys(Keys.ENTER)
-time.sleep(2)
-driver.find_element_by_xpath('/html/body/ytd-app/div/ytd-page-manager/ytd-search/div[1]/ytd-two-column-search-results-renderer/div/ytd-section-list-renderer/div[2]/ytd-item-section-renderer/div[3]/ytd-video-renderer[2]/div[1]/ytd-thumbnail/a/yt-img-shadow/img').click()
-time.sleep(8)
-driver.find_element_by_xpath('/html/body/ytd-app/div/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player/div/div/div[17]/div/div[3]/div/div[2]/span/button').click()
 
-time.sleep(3600)
-driver.quit()
+browser = webdriver.Chrome()
+browser.implicitly_wait(10)
+browser.get("http://www.youtube.com/")
+
+# Search for element
+path = browser.find_element_by_xpath(
+    '/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/form/div[1]/div[1]/input')
+path.click()
+
+search_element = browser.find_element_by_xpath(
+    '/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/form/div[1]/div[1]/input')
+time.sleep(0.8)
+search_element.send_keys(MUSIC_NAME)
+
+# Click the search bar
+search_bar = browser.find_element_by_xpath(
+    '/html/body/ytd-app/div/div/ytd-masthead/div[3]/div[2]/ytd-searchbox/form/div[1]/div[1]/input')
+search_bar.send_keys(Keys.ENTER)
+
+# File locations (../data_base/youtube_list.json) / data_base/youtube_list.json
+try:
+    with open('data_base/youtube_list.json') as f:
+        data = json.load(f)
+except ImportError:
+    print('The element json was not found!')
+
+# Find the video
+path_videos = random.choice(data['links'])
+find_the_video = browser.find_element_by_xpath(path_videos)
+find_the_video.click()
+
+# Skip the video
+ads_element = EC.visibility_of_element_located((By.XPATH, "/html/body/ytd-app/div/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player/div/div/div[17]/div/div[3]/div/div[2]/span/button"))
+
+if ads_element:
+    skip_video = browser.find_element_by_xpath(
+        '/html/body/ytd-app/div/ytd-page-manager/ytd-watch-flexy/div[5]/div[1]/div/div[1]/div/div/div/ytd-player/div/div/div[17]/div/div[3]/div/div[2]/span/button')
+    skip_video.click()
+
+    
+
