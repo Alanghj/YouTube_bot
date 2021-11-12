@@ -7,6 +7,7 @@
 
 ```python
 pip install selenium
+pip install tk
 ```
 
 ## Drivers
