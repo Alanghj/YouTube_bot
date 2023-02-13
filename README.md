@@ -25,8 +25,12 @@ Windows:
 * You will have to download, Chrome WebDriver go to: https://sites.google.com/chromium.org/driver/, and download, ChromeDriver, put it inside your directory.
 
 
-## :mortar_board: Author
+## License
 
+* See the [LICENSE](LICENSE.md) file for license rights and limitations (MIT).
+
+
+## :mortar_board: Author
 
 <table align="center">
     <tr>
